@@ -1,48 +1,31 @@
-name: FastAPI CI/CD
+name: CI/CD Pipeline
 
-# Trigger the workflow on push to the main branch
 on:
   push:
     branches:
-      - main  # You can change this to your desired branch
+      - main  # Trigger the workflow when changes are pushed to the 'main' branch
 
 jobs:
-  build-and-deploy:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code from the repository
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up Python environment
-      - name: Set up Python 3.9
+      # Step to set up Python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.9'  # or whichever Python version you're using
 
-      # Step 3: Install dependencies
+      # Step to install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install pytest
+          pip install -r requirements.txt  # If you have a requirements.txt file
 
-      # Step 4: Run tests
+      # Step to run pytest
       - name: Run tests with pytest
-        run: |
-          pytest
-
-      # Step 5: Build the FastAPI application (adjust this step if necessary)
-      - name: Build FastAPI Application
-        run: |
-          echo "Building FastAPI app..."  # Add any specific build commands if needed
-
-      # Step 6: Deploy to Render (replace this section for your deployment platform)
-      - name: Deploy to Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store API key as GitHub secret
-        run: |
-          # Install Render CLI
-          curl https://cli.render.com/install | bash
-          # Deploy the application
-          render deploy --service <YOUR_SERVICE_ID>
+        run: pytest
