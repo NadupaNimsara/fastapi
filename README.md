@@ -1,2 +1,3 @@
 # fastapi
-here I created a machine learning model to predict diabetes.
+here I created my machine learning model to predict diabetes.
+
