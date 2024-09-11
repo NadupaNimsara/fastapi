@@ -24,14 +24,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # Ensure you have a requirements.txt file listing your dependencies
 
-
       - name: Deploy to Render
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store the Render API key as a secret in GitHub
         run: |
-          curl -X POST https://api.render.com/deploy/srv-crfbp43qf0us738ihh50?key=XjO40uLuZPk
+          curl -X POST https://api.render.com/v1/services/srv-crfbp43qf0us738ihh50/deploys \
           -H "Authorization: Bearer $RENDER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"branch": "main"}'
-        # Replace YOUR_SERVICE_ID with your Render service ID (available in Render dashboard)
-        # The 'branch' should match the branch you are deploying (e.g., 'main')
+        # Replace srv-crfbp43qf0us738ihh50 with your actual Render service ID
+        # Ensure the branch is the correct one you're deploying (e.g., 'main')
