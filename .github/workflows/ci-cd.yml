@@ -29,7 +29,7 @@ jobs:
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}  # Store the Render API key as a secret in GitHub
         run: |
-          curl -X POST https://api.render.com/v1/services/YOUR_SERVICE_ID/deploys \
+          curl -X POST https://api.render.com/deploy/srv-crfbp43qf0us738ihh50?key=XjO40uLuZPk
           -H "Authorization: Bearer $RENDER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"branch": "main"}'
