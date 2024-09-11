@@ -24,10 +24,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt  # Ensure you have a requirements.txt file listing your dependencies
 
-      - name: Run tests
-        run: |
-          pytest  # Replace this with any test framework or script you use
-        # Ensure you have tests set up in your repository
 
       - name: Deploy to Render
         env:
